@@ -1,6 +1,6 @@
 -- [[ Keymaps and options ]]
-require('config.keymaps')
-require('config.options')
+require('core.keymaps')
+require('core.options')
 
 -- [[ Lazy.vim plguin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { import = 'plugins' },
+  { import = 'plugins.coding' },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`

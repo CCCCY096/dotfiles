@@ -13,54 +13,64 @@ return {
         -- NOTE: If you are having trouble with this installation,
         --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
       },
+      'folke/trouble.nvim',
     },
     config = function()
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      local trouble = require 'trouble.providers.telescope'
+
       require('telescope').setup {
         defaults = {
           mappings = {
             i = {
-              ["<CR>"] = require("telescope.actions").select_default + require("telescope.actions").center,
-              ["<C-x>"] = require("telescope.actions").select_horizontal + require("telescope.actions").center,
-              ["<C-v>"] = require("telescope.actions").select_vertical + require("telescope.actions").center,
-              ["<C-t>"] = require("telescope.actions").select_tab + require("telescope.actions").center,
+              ['<CR>'] = require('telescope.actions').select_default + require('telescope.actions').center,
+              ['<C-x>'] = require('telescope.actions').select_horizontal + require('telescope.actions').center,
+              ['<C-v>'] = require('telescope.actions').select_vertical + require('telescope.actions').center,
+              ['<C-t>'] = trouble.open_with_trouble,
+              ['<C-u>'] = require('telescope.actions').results_scrolling_up,
+              ['<C-d>'] = require('telescope.actions').results_scrolling_down,
+              ['Down'] = require('telescope.actions').cycle_history_next,
+              ['Up'] = require('telescope.actions').cycle_history_prev,
             },
             n = {
-              ["<CR>"] = require("telescope.actions").select_default + require("telescope.actions").center,
-              ["<C-x>"] = require("telescope.actions").select_horizontal + require("telescope.actions").center,
-              ["<C-v>"] = require("telescope.actions").select_vertical + require("telescope.actions").center,
-              ["<C-t>"] = require("telescope.actions").select_tab + require("telescope.actions").center,
-            }
-          }
-        }
+              ['<CR>'] = require('telescope.actions').select_default + require('telescope.actions').center,
+              ['<C-x>'] = require('telescope.actions').select_horizontal + require('telescope.actions').center,
+              ['<C-v>'] = require('telescope.actions').select_vertical + require('telescope.actions').center,
+              ['<C-t>'] = trouble.open_with_trouble,
+              ['<C-u>'] = require('telescope.actions').results_scrolling_up,
+              ['<C-d>'] = require('telescope.actions').results_scrolling_down,
+              ['Down'] = require('telescope.actions').cycle_history_next,
+              ['Up'] = require('telescope.actions').cycle_history_prev,
+            },
+          },
+          dynamic_preview_tile = true,
+          scroll_strategy = 'limit',
+        },
       }
 
       -- Enable telescope fzf native, if installed
-      pcall(require('telescope').load_extension, 'fzf')
+      require('telescope').load_extension 'fzf'
 
-      -- See `:help telescope.builtin`
-      vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-      vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+      -- Really useful
+      vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[f]ind recently [o]pened files' })
+      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[f]ind existing [b]uffers' })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      end, { desc = '[/] find in current buffer' })
+      vim.keymap.set('n', '<leader>fa', require('telescope.builtin').live_grep, { desc = '[f]ind [a]ll by live grep' })
+      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[f]ind [f]iles' })
+      vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[f]ind [r]esume' })
 
-      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-    end
+      -- less frequent
+      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[f]ind [g]it files' })
+      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[f]ind [h]elp' })
+      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[f]ind current [w]ord' })
+    end,
   },
 }
