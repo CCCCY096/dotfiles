@@ -25,5 +25,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic list' })
 
--- Save
+-- Save and quit
 vim.keymap.set('n', '<leader>s', ':w<CR>', { desc = 'Save current buffer' })
+vim.keymap.set('n', '<leader>q', ':qa<CR>', { desc = '[q]uit all' })
