@@ -6,11 +6,15 @@ return {
       priority = 1000,
       config = function()
         require('bamboo').setup {
-          -- optional configuration here
+          toggle_style_key = '<leader>tt',
+          term_colors = false,
+          highlights = {
+            ['@comment'] = { fg = '$grey' },
+          },
         }
         require('bamboo').load()
       end,
-    }
+    },
   },
 
   {
@@ -30,12 +34,12 @@ return {
             'filename',
             path = 1, -- 1: show relative path
           },
-          'diagnostics'
+          'diagnostics',
         },
         lualine_c = { 'branch', 'diff' },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_z = { 'location' },
       },
       inactive_sections = {
         lualine_a = {},
@@ -43,7 +47,7 @@ return {
         lualine_c = {},
         lualine_x = { 'location' },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
       },
     },
   },
