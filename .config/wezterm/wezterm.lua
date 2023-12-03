@@ -15,5 +15,7 @@ end
 -- -- For example, changing the color scheme:
 config.color_scheme = 'Bamboo'
 
+-- config.term = 'wezterm'
+
 -- and finally, return the configuration to wezterm
 return config
