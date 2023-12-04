@@ -5,14 +5,16 @@ return {
       lazy = false,
       priority = 1000,
       config = function()
-        require('bamboo').setup {
-          toggle_style_key = '<leader>tt',
-          term_colors = false,
+        local bamboo = require 'bamboo'
+        bamboo.setup {
+          style = 'multiplex',
           highlights = {
             ['@comment'] = { fg = '$grey' },
           },
         }
-        require('bamboo').load()
+        bamboo.load()
+
+        vim.keymap.set('n', '<leader>tt', bamboo.toggle, { desc = '[t]oggle bamboo [t]heme' })
       end,
     },
   },
