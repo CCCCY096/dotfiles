@@ -41,7 +41,7 @@ return {
       'nvim-telescope/telescope-fzf-native.nvim',
 
       -- formatter; might need to override some parts of it
-      'stevearc/conform.nvim'
+      'stevearc/conform.nvim',
     },
     config = function()
       -- the following mason-related setup order is enforced
@@ -56,6 +56,8 @@ return {
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+      vim.api.nvim_create_augroup('LSPAutoFormat', { clear = true })
 
       --  This function gets run when an LSP connects to a particular buffer.
       local on_attach = function(client, bufnr)
@@ -88,7 +90,6 @@ return {
           end
         end
 
-        vim.api.nvim_create_augroup('LSPAutoFormat', { clear = true })
         local lspAutoFormatGroup = vim.api.nvim_create_augroup('LSPAutoFormat', { clear = false })
 
         -- Auto format for Go files

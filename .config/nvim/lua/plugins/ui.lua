@@ -7,7 +7,6 @@ return {
       config = function()
         local bamboo = require 'bamboo'
         bamboo.setup {
-          style = 'multiplex',
           highlights = {
             ['@comment'] = { fg = '$grey' },
           },

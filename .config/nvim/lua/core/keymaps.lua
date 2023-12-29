@@ -13,8 +13,6 @@ vim.keymap.set('n', '<C-i>', '<C-i>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
-vim.keymap.set('x', '<leader>p', '"_dP', { desc = '[p]aste without copying' })
-
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -28,3 +26,6 @@ vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diag
 -- Save and quit
 vim.keymap.set('n', '<leader>s', ':w<CR>', { desc = 'Save current buffer' })
 vim.keymap.set('n', '<leader>q', ':qa<CR>', { desc = '[q]uit all' })
+
+vim.keymap.set('n', 'q', '<Nop>')
+vim.keymap.set('n', 'Q', 'q')

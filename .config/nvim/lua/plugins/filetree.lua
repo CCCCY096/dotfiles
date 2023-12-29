@@ -8,20 +8,22 @@ return {
     require('mini.files').setup()
 
     -- Toggle explorer
-    local minifiles_toggle = function(...)
-      if not MiniFiles.close() then
-        MiniFiles.open(...)
-      end
-    end
-    vim.keymap.set('n', '<leader>e', minifiles_toggle, { desc = 'Toggle file [e]xplore' })
-
     local minifiles_toggle_current_directory = function()
       if not MiniFiles.close() then
-        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+        if not pcall(MiniFiles.open, vim.api.nvim_buf_get_name(0)) then
+          MiniFiles.open(nil, false)
+        end
         MiniFiles.reveal_cwd()
       end
     end
-    vim.keymap.set('n', '<leader>E', minifiles_toggle_current_directory, { desc = 'Toggle file [E]xplore of current directory' })
+    vim.keymap.set('n', '<leader>e', minifiles_toggle_current_directory, { desc = 'Toggle file [e]xplore in cwd' })
+
+    local minifiles_toggle = function()
+      if not MiniFiles.close() then
+        MiniFiles.open(nil, false)
+      end
+    end
+    vim.keymap.set('n', '<leader>E', minifiles_toggle, { desc = 'Toggle fresh file [E]xplore' })
 
     -- Create mapping to show/hide dot-files
     local show_dotfiles = true
