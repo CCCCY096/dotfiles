@@ -1,0 +1,23 @@
+import = [
+    "~/.config/alacritty/themes/themes/tokyo-night.toml"
+]
+
+[font]
+size = 13.0
+
+[font.bold]
+style = "Medium"
+
+[font.bold_italic]
+style = "Medium Italic"
+
+[font.italic]
+style = "Light Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Light"
+
+[window]
+opacity = 0.999
+startup_mode = "Maximized"

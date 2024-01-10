@@ -18,7 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { import = 'plugins' },
-  { import = 'plugins.coding' },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`

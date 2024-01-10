@@ -24,8 +24,12 @@ vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floa
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic list' })
 
 -- Save and quit
-vim.keymap.set('n', '<leader>s', ':w<CR>', { desc = 'Save current buffer' })
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = '[w]rite current buffer' })
 vim.keymap.set('n', '<leader>q', ':qa<CR>', { desc = '[q]uit all' })
 
 vim.keymap.set('n', 'q', '<Nop>')
 vim.keymap.set('n', 'Q', 'q')
+
+-- move lines up or down
+vim.keymap.set('v', 'J', ":'<,'>m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":'<,'>m '<-2<CR>gv=gv")

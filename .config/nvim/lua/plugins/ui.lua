@@ -1,21 +1,27 @@
 return {
   {
-    {
-      'ribru17/bamboo.nvim',
-      lazy = false,
-      priority = 1000,
-      config = function()
-        local bamboo = require 'bamboo'
-        bamboo.setup {
-          highlights = {
-            ['@comment'] = { fg = '$grey' },
-          },
-        }
-        bamboo.load()
-
-        vim.keymap.set('n', '<leader>tt', bamboo.toggle, { desc = '[t]oggle bamboo [t]heme' })
-      end,
-    },
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = function()
+      vim.o.background = 'dark'
+      vim.cmd [[colorscheme gruvbox]]
+    end,
+    -- {
+    --   'ribru17/bamboo.nvim',
+    --   lazy = false,
+    --   priority = 1000,
+    --   config = function()
+    --     local bamboo = require 'bamboo'
+    --     bamboo.setup {
+    --       highlights = {
+    --         ['@comment'] = { fg = '$grey' },
+    --       },
+    --     }
+    --     bamboo.load()
+    --
+    --     vim.keymap.set('n', '<leader>tt', bamboo.toggle, { desc = '[t]oggle bamboo [t]heme' })
+    --   end,
+    -- },
   },
 
   {
@@ -24,6 +30,7 @@ return {
     -- See `:help lualine.txt`
     opts = {
       options = {
+        theme = 'gruvbox',
         component_separators = '',
         section_separators = '',
       },
