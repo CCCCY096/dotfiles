@@ -1,4 +1,4 @@
-local lazyFile = require('utils').lazy_file_events
+local lazyFile = require('utils').lazy_events
 
 return {
   {
@@ -13,12 +13,13 @@ return {
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    config = true,
   },
 
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
+    event = { lazyFile },
     config = true,
   },
 
@@ -60,14 +61,13 @@ return {
 
   {
     'folke/which-key.nvim',
-    opts = {},
     config = true,
   },
 
   {
     'echasnovski/mini.sessions',
     config = function()
-      require 'mini.sessions'.setup()
+      require('mini.sessions').setup()
 
       local set_session = function()
         MiniSessions.write 'Session.vim'
@@ -78,7 +78,7 @@ return {
       local local_session = next(MiniSessions.detected)
       if local_session then
         MiniSessions.read(local_session.name)
-        print("found and load a local session!")
+        print 'found and load a local session!'
       end
     end,
   },

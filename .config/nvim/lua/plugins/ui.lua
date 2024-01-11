@@ -1,27 +1,30 @@
 return {
   {
-    'ellisonleao/gruvbox.nvim',
+    'rebelot/kanagawa.nvim',
     priority = 1000,
     config = function()
-      vim.o.background = 'dark'
-      vim.cmd [[colorscheme gruvbox]]
+      vim.cmd 'colorscheme kanagawa'
     end,
-    -- {
-    --   'ribru17/bamboo.nvim',
-    --   lazy = false,
-    --   priority = 1000,
-    --   config = function()
-    --     local bamboo = require 'bamboo'
-    --     bamboo.setup {
-    --       highlights = {
-    --         ['@comment'] = { fg = '$grey' },
-    --       },
-    --     }
-    --     bamboo.load()
-    --
-    --     vim.keymap.set('n', '<leader>tt', bamboo.toggle, { desc = '[t]oggle bamboo [t]heme' })
-    --   end,
-    -- },
+  },
+
+  {
+    'ellisonleao/gruvbox.nvim',
+    lazy = true,
+    config = function()
+      vim.o.background = 'dark'
+    end,
+  },
+
+  {
+    'ribru17/bamboo.nvim',
+    lazy = true,
+    config = function()
+      require('bamboo').setup {
+        highlights = {
+          ['@comment'] = { fg = '$grey' },
+        },
+      }
+    end,
   },
 
   {

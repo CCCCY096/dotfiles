@@ -1,4 +1,4 @@
-local lazyFile = require('utils').lazy_file_events
+local lazyFile = require('utils').lazy_events
 
 return {
   {
@@ -95,6 +95,3 @@ return {
     end,
   },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
