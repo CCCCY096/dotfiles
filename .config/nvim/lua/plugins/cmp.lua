@@ -28,7 +28,7 @@ return {
       'hrsh7th/cmp-cmdline',
     },
     config = function()
-      vim.o.completeopt = 'menu,menuone,noselect'
+      vim.o.completeopt = 'menu,menuone,noselect,preview'
 
       local luasnip = require 'luasnip'
       local cmp = require 'cmp'

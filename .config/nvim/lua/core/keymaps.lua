@@ -5,8 +5,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- [[ Quality of life ]]
 -- Stay in the middle!
--- vim.keymap.set('n', '<C-u>', '<C-u>zz')
--- vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-]>', '<C-]>zz')
 vim.keymap.set('n', '<C-o>', '<C-o>zz')
 vim.keymap.set('n', '<C-i>', '<C-i>zz')

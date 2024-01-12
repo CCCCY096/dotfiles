@@ -47,24 +47,24 @@ return {
       -- Enable telescope fzf native, if installed
       require('telescope').load_extension 'fzf'
 
-      -- Really useful
-      vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[f]ind recently [o]pened files' })
-      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[f]ind existing [b]uffers' })
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[f]ind recently [o]pened files' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[f]ind existing [b]uffers' })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
       end, { desc = '[/] find in current buffer' })
-      vim.keymap.set('n', '<leader>fa', require('telescope.builtin').live_grep, { desc = '[f]ind [a]ll by live grep' })
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[f]ind [f]iles' })
-      vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[f]ind [r]esume' })
+      vim.keymap.set('n', '<leader>fa', builtin.live_grep, { desc = '[f]ind [a]ll by live grep' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[f]ind [r]esume' })
 
       -- less frequent
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[f]ind [g]it files' })
-      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[f]ind [h]elp' })
-      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[f]ind current [w]ord' })
+      vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[f]ind [g]it files' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[f]ind [h]elp' })
+      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[f]ind current [w]ord' })
     end,
   },
 }

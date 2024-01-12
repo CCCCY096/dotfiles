@@ -24,9 +24,9 @@ return {
   },
 
   {
-    'altermo/ultimate-autopair.nvim',
+    'echasnovski/mini.pairs',
     event = { 'InsertEnter', 'CmdlineEnter' },
-    branch = 'v0.6', --recomended as each new version will have breaking changes
+    version = false,
     config = true,
   },
 
@@ -66,6 +66,7 @@ return {
 
   {
     'echasnovski/mini.sessions',
+    version = false,
     config = function()
       require('mini.sessions').setup()
 
@@ -75,11 +76,11 @@ return {
 
       vim.keymap.set('n', '<leader>S', set_session, { desc = 'save [S]ession' })
 
-      local local_session = next(MiniSessions.detected)
-      if local_session then
-        MiniSessions.read(local_session.name)
-        print 'found and load a local session!'
-      end
+      -- local local_session = next(MiniSessions.detected)
+      -- if local_session then
+      --   MiniSessions.read(local_session.name)
+      --   print 'found and load a local session!'
+      -- end
     end,
   },
 }

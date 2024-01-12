@@ -1,17 +1,15 @@
 return {
   {
     'rebelot/kanagawa.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd 'colorscheme kanagawa'
-    end,
+    lazy = true,
   },
 
   {
     'ellisonleao/gruvbox.nvim',
-    lazy = true,
+    priority = 1000,
     config = function()
       vim.o.background = 'dark'
+      vim.cmd 'colorscheme gruvbox'
     end,
   },
 
@@ -61,5 +59,13 @@ return {
         lualine_z = {},
       },
     },
+  },
+
+  {
+    'echasnovski/mini.starter',
+    version = false,
+    config = function()
+      require('mini.starter').setup()
+    end,
   },
 }
