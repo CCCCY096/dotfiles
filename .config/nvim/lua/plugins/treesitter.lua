@@ -1,10 +1,7 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    event = { lazyFile },
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
       { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },

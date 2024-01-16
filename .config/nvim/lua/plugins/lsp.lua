@@ -1,25 +1,9 @@
-local lazyFile = require('utils').lazy_events
-
-local servers = {
-  -- Go
-  gopls = {
-    gofumpt = true,
-  },
-
-  -- lua
-  lua_ls = {
-  },
-
-  clangd = {},
-  pyright = {},
-  yamlls = {},
-  marksman = {},
-}
+-- for Go Templ
+vim.filetype.add { extension = { templ = 'templ' } }
 
 return {
   {
     'williamboman/mason-lspconfig.nvim',
-    event = { lazyFile },
     dependencies = {
       'neovim/nvim-lspconfig',
       'williamboman/mason.nvim',
@@ -41,6 +25,24 @@ return {
       'stevearc/conform.nvim',
     },
     config = function()
+      local servers = {
+        -- Go
+        gopls = {
+          gofumpt = true,
+        },
+
+        -- lua
+        lua_ls = {},
+
+        -- Zig
+        zls = {},
+
+        clangd = {},
+        pyright = {},
+        yamlls = {},
+        marksman = {},
+      }
+
       -- the following mason-related setup order is enforced
       local mason_lspconfig = require 'mason-lspconfig'
       mason_lspconfig.setup {
@@ -53,7 +55,7 @@ return {
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-      table.insert(require('cmp').get_config().sources, {name = 'nvim_lsp'})
+      table.insert(require('cmp').get_config().sources, { name = 'nvim_lsp' })
 
       --  This function gets run when an LSP connects to a particular buffer.
       local on_attach = function(client, bufnr)

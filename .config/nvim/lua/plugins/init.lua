@@ -1,15 +1,11 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   {
     'tpope/vim-sleuth',
-    event = { lazyFile },
   },
 
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    event = { lazyFile },
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
@@ -19,20 +15,17 @@ return {
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
-    event = { lazyFile },
     config = true,
   },
 
   {
     'echasnovski/mini.pairs',
-    event = { 'InsertEnter', 'CmdlineEnter' },
     version = false,
     config = true,
   },
 
   {
     'RRethy/vim-illuminate',
-    event = { lazyFile },
     config = function()
       vim.keymap.set('n', '<leader>ti', require('illuminate').toggle, { desc = '[t]oggle [i]lluminate' })
     end,
@@ -40,7 +33,6 @@ return {
 
   {
     'mbbill/undotree',
-    event = { lazyFile },
     config = function()
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[u]ndo tree' })
     end,
@@ -49,7 +41,6 @@ return {
   {
     'echasnovski/mini.map',
     version = false,
-    event = { lazyFile },
     config = function()
       require('mini.map').setup()
       vim.keymap.set('n', '<leader>mo', MiniMap.toggle, { desc = '[m]ap toggle' })
@@ -76,11 +67,11 @@ return {
 
       vim.keymap.set('n', '<leader>S', set_session, { desc = 'save [S]ession' })
 
-      -- local local_session = next(MiniSessions.detected)
-      -- if local_session then
-      --   MiniSessions.read(local_session.name)
-      --   print 'found and load a local session!'
-      -- end
+      local local_session = next(MiniSessions.detected)
+      if local_session then
+        MiniSessions.read(local_session.name)
+        print 'found and load a local session!'
+      end
     end,
   },
 }

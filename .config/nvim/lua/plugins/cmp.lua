@@ -1,5 +1,3 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   {
     'L3MON4D3/LuaSnip',
@@ -17,7 +15,6 @@ return {
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = { lazyFile },
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -44,8 +41,6 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert {
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete {},
@@ -71,7 +66,6 @@ return {
         },
         sources = {
           { name = 'luasnip' },
-          { name = 'buffer' },
         },
       }
 

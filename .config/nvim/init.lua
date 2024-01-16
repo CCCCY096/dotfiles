@@ -1,6 +1,7 @@
 -- [[ Keymaps and options ]]
 require 'core.keymaps'
 require 'core.options'
+require 'core.autocmd'
 
 -- [[ Lazy.vim plguin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

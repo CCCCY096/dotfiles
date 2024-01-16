@@ -1,10 +1,7 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   {
     'stevearc/conform.nvim',
     dependencies = { 'williamboman/mason.nvim' },
-    event = { lazyFile },
     config = function()
       local conform = require 'conform'
       conform.setup {

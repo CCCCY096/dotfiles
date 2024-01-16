@@ -7,6 +7,7 @@ return {
       keymaps = {
         ['<C-v>'] = 'actions.select_vsplit',
         ['<C-s>'] = 'actions.select_split',
+        ['q'] = 'actions.close',
       },
       view_options = {
         -- Show files and directories that start with "."

@@ -1,8 +1,5 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   'folke/trouble.nvim',
-  event = { lazyFile },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local curry = function(arg)

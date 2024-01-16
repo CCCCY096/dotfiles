@@ -1,10 +1,7 @@
-local lazyFile = require('utils').lazy_events
-
 return {
   {
     'mfussenegger/nvim-lint',
     dependencies = { 'williamboman/mason.nvim' },
-    event = { lazyFile },
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
