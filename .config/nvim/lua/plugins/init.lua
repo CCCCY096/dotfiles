@@ -69,9 +69,17 @@ return {
 
       local local_session = next(MiniSessions.detected)
       if local_session then
-        MiniSessions.read(local_session.name)
-        print 'found and load a local session!'
+        print 'Found a local session!'
       end
+
+      local try_load = function()
+        if local_session then
+          MiniSessions.read(local_session.name)
+          print 'Loaded a local session!'
+        end
+      end
+
+      vim.keymap.set('n', '<leader>s', try_load, { desc = 'load [s]ession' })
     end,
   },
 }
