@@ -54,32 +54,4 @@ return {
     'folke/which-key.nvim',
     config = true,
   },
-
-  {
-    'echasnovski/mini.sessions',
-    version = false,
-    config = function()
-      require('mini.sessions').setup()
-
-      local set_session = function()
-        MiniSessions.write 'Session.vim'
-      end
-
-      vim.keymap.set('n', '<leader>S', set_session, { desc = 'save [S]ession' })
-
-      local local_session = next(MiniSessions.detected)
-      if local_session then
-        print 'Found a local session!'
-      end
-
-      local try_load = function()
-        if local_session then
-          MiniSessions.read(local_session.name)
-          print 'Loaded a local session!'
-        end
-      end
-
-      vim.keymap.set('n', '<leader>s', try_load, { desc = 'load [s]ession' })
-    end,
-  },
 }

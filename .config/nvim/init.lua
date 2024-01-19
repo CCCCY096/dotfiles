@@ -2,6 +2,7 @@
 require 'core.keymaps'
 require 'core.options'
 require 'core.autocmd'
+require 'core.custom'
 
 -- [[ Lazy.vim plguin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
