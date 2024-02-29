@@ -20,7 +20,6 @@ return {
 
       -- need telescope picker lsp attaches
       'nvim-telescope/telescope-fzf-native.nvim',
-      -- 'ibhagwan/fzf-lua',
 
       -- formatter; might need to override some parts of it
       'stevearc/conform.nvim',
@@ -81,13 +80,9 @@ return {
         nmap('gI', require('telescope.builtin').lsp_implementations, '[g]oto [I]mplementation')
         nmap('gD', require('telescope.builtin').lsp_type_definitions, '[g]oto Type [D]efinition')
 
-        -- local fzf = require 'fzf-lua'
-        -- nmap('<leader>fd', fzf.lsp_document_symbols, '[f]ind symbols in [d]ocument')
-        -- nmap('<leader>fs', fzf.lsp_live_workspace_symbols, '[f]ind [s]ymbols in workspace')
-        -- nmap('gd', fzf.lsp_definitions, '[g]oto [d]efinition')
-        -- nmap('gr', fzf.lsp_references, '[g]oto [r]eferences')
-        -- nmap('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
-        -- nmap('gD', fzf.lsp_type_definitions, '[g]oto Type [D]efinition')
+        vim.keymap.set('n', 'gR', function()
+          require('trouble').toggle 'lsp_references'
+        end, { desc = 'toggle trouble lsp_references' })
 
         if client.server_capabilities.documentFormattingProvider then
           if client.name == 'lua_ls' then -- don't use LSP format provider for lua_ls; we have stylua as a better formatter

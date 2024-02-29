@@ -22,8 +22,5 @@ return {
     vim.keymap.set('n', '<leader>xl', function()
       curry 'loclist'
     end, { desc = 'toggle trouble loclist' })
-    vim.keymap.set('n', 'gR', function()
-      curry 'lsp_references'
-    end, { desc = 'toggle trouble lsp_references' })
   end,
 }

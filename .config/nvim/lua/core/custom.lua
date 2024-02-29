@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_autocmd('VimLeavePre', {
   callback = function()
     local sf = vim.v.this_session
-    if sf ~= nil then
+    if sf ~= "" then
       mksession(vim.v.this_session)
     end
   end,
