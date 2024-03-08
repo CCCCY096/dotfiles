@@ -1,10 +1,11 @@
 return {
   'mfussenegger/nvim-lint',
   config = function()
+    vim.list_extend(ENSURE_INSTALLED, {})
+
     local lint = require 'lint'
     lint.linters_by_ft = {
-      go = { 'golangcilint' },
-      markdown = { 'markdownlint' },
+      go = { 'golangcilint' }, -- golangcilint is installed locally by myself instead of mason
     }
 
     vim.keymap.set('n', '<leader>l', lint.try_lint, { desc = '[l]int' })

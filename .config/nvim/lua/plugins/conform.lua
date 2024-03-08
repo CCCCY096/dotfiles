@@ -1,6 +1,12 @@
 return {
   'stevearc/conform.nvim',
   config = function()
+    vim.list_extend(ENSURE_INSTALLED, {
+      'stylua',
+      'prettier',
+      'codespell',
+    })
+
     local conform = require 'conform'
     conform.setup {
       notify_on_error = false,
@@ -10,7 +16,6 @@ return {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        yaml = { 'prettier' },
         json = { 'prettier' },
         markdown = { 'prettier' },
         -- Use the "*" filetype to run formatters on all filetypes.
