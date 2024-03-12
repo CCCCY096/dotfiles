@@ -43,7 +43,7 @@ return {
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'type [D]efinition')
+        map('gD', require('telescope.builtin').lsp_type_definitions, '[g]oto type [D]efinition')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
@@ -51,7 +51,7 @@ return {
 
         -- Fuzzy find all the symbols in your current workspace
         --  Similar to document symbols, except searches over your whole project.
-        map('<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[f]ind [s]ymbols in workspace')
+        map('<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[f]ind [s]symbols in workspace')
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
@@ -64,10 +64,6 @@ return {
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap
         map('K', vim.lsp.buf.hover, 'hover documentation')
-
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header
-        map('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
 
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)

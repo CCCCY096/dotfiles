@@ -31,7 +31,7 @@ return {
     -- See `:help lualine.txt`
     opts = {
       options = {
-        theme = 'gruvbox',
+        theme = 'auto',
         component_separators = '',
         section_separators = '',
       },

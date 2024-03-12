@@ -1,5 +1,4 @@
 return {
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- "gc" to comment visual regions/lines
@@ -11,14 +10,8 @@ return {
   },
 
   {
-    'echasnovski/mini.pairs',
-    version = false,
-    config = true,
-  },
-
-  {
     'echasnovski/mini.nvim',
-    config = function ()
+    config = function()
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -34,12 +27,8 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      require('mini.map').setup()
-      vim.keymap.set('n', '<leader>mo', MiniMap.toggle, { desc = '[m]ap toggle' })
-      vim.keymap.set('n', '<leader>mf', MiniMap.toggle_focus, { desc = '[m]ap [f]ocus' })
-      vim.keymap.set('n', '<leader>mr', MiniMap.toggle, { desc = '[m]ap [r]efresh' })
-      vim.keymap.set('n', '<leader>ms', MiniMap.toggle, { desc = '[m]ap [s]ide' })
-    end
+      require('mini.pairs').setup()
+    end,
   },
 
   {

@@ -14,6 +14,11 @@ local mksession = function(custom_sf)
 end
 
 local ldsession = function()
+  if vim.fn.findfile(default_sf) ~= '' then
+    print 'No local session to load!'
+    return
+  end
+
   local cmd = vim.fn.join { 'source ', default_sf }
   vim.cmd(cmd)
   print 'Loaded a local session!'
@@ -30,7 +35,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_autocmd('VimLeavePre', {
   callback = function()
     local sf = vim.v.this_session
-    if sf ~= "" then
+    if sf ~= '' then
       mksession(vim.v.this_session)
     end
   end,
