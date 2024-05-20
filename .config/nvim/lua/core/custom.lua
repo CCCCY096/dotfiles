@@ -14,7 +14,7 @@ local mksession = function(custom_sf)
 end
 
 local ldsession = function()
-  if vim.fn.findfile(default_sf) ~= '' then
+  if vim.fn.findfile(default_sf) == '' then
     print 'No local session to load!'
     return
   end

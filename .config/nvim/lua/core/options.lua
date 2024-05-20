@@ -56,6 +56,7 @@ vim.opt.hlsearch = true
 
 -- Tab length should be 4
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- No more annoying swap file
 vim.opt.swapfile = false

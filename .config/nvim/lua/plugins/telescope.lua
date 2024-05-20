@@ -39,7 +39,6 @@ return {
             i = common_mappings,
             n = common_mappings,
           },
-          dynamic_preview_tile = true,
           scroll_strategy = 'limit',
         },
         extensions = {
@@ -74,12 +73,11 @@ return {
       -- Mics.
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[f]ind [h]elp' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[f]ind [r]esume' })
-      vim.keymap.set('n', '<leader>fm', builtin.builtin, { desc = '[f]ind [m]ore...' })
+      vim.keymap.set('n', '<leader>fm', builtin.builtin, { desc = '[f]ind [m]or...' })
       -- Shortcut for searching your neovim configuration files
       vim.keymap.set('n', '<leader>fn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[f]ind [n]eovim files' })
-
     end,
   },
 }

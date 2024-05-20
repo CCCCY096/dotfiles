@@ -1,9 +1,6 @@
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', config = true },
-
   {
     'folke/which-key.nvim',
     config = true,
@@ -28,6 +25,12 @@ return {
       require('mini.surround').setup()
 
       require('mini.pairs').setup()
+
+      local toggleAutoPair = function()
+        vim.g.minipairs_disable = not vim.g.minipairs_disable
+      end
+
+      vim.keymap.set('n', '<leader>tp', toggleAutoPair, { desc = '[t]oggle auto [p]air' })
     end,
   },
 

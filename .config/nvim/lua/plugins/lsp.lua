@@ -61,13 +61,9 @@ return {
         -- or a suggestion from your LSP for this to activate.
         map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
-        -- Opens a popup that displays documentation about the word under your cursor
-        --  See `:help K` for why this keymap
-        map('K', vim.lsp.buf.hover, 'hover documentation')
-
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHighlightProvider then
+        if client and client.supports_method 'textDocument/documentHighlight' then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
             callback = vim.lsp.buf.document_highlight,
@@ -78,6 +74,14 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
+
+        if client and client.supports_method 'textDocument/inlayHint' then
+          vim.lsp.inlay_hint.enable(true)
+
+          map('<leader>c', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end, '[t]oggle inlay [h]int')
+        end
       end,
     })
 
@@ -87,6 +91,7 @@ return {
     local servers = {
       gopls = {},
       lua_ls = {},
+      ocamllsp = {},
       zls = {},
       clangd = {},
       pyright = {},
