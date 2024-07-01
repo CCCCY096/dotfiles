@@ -2,14 +2,13 @@ return {
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    lazy = true,
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
 
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
       },
 
@@ -22,13 +21,12 @@ return {
     config = function()
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
-      local trouble = require 'trouble.providers.telescope'
-
       local common_mappings = {
-        ['<C-t>'] = trouble.open_with_trouble,
+        ['<C-t>'] = require('trouble.sources.telescope').open,
         ['<C-u>'] = require('telescope.actions').results_scrolling_up,
         ['<C-d>'] = require('telescope.actions').results_scrolling_down,
         ['<C-c>'] = require('telescope.actions').close,
+        ['<C-g>'] = require('telescope.actions.layout').toggle_preview,
       }
 
       -- [[ Configure Telescope ]]
@@ -40,6 +38,8 @@ return {
             n = common_mappings,
           },
           scroll_strategy = 'limit',
+          layout_strategy = 'flex',
+          wrap_results = true,
         },
         extensions = {
           ['ui-select'] = {
@@ -60,13 +60,7 @@ return {
       vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[f]ind [g]it files' })
 
       -- Grep
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to telescope to change theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] fuzzily search in current buffer' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[f]ind current [w]ord' })
       vim.keymap.set('n', '<leader>fa', builtin.live_grep, { desc = '[f]ind [a]ll by live grep' })
 

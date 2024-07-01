@@ -48,15 +48,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- NOTE: You should make sure your terminal supports this
-vim.opt.termguicolors = true
-
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-
--- Tab length should be 4
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
 
 -- No more annoying swap file
 vim.opt.swapfile = false

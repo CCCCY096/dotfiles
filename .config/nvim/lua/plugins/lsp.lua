@@ -12,13 +12,17 @@ return {
     { 'j-hui/fidget.nvim', config = true },
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua', -- only load on lua files
+      config = true,
+    },
 
     -- Adds LSP completion capabilities
     'hrsh7th/cmp-nvim-lsp',
 
-    -- Need telescope picker lsp attaches
-    'nvim-telescope/telescope.nvim',
+    -- Need pickers when lsp attaches
+    'ibhagwan/fzf-lua',
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -28,30 +32,25 @@ return {
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- Jump to the definition of the word under your cursor.
-        --  This is where a variable was first declared, or where a function is defined, etc.
-        --  To jump back, press <C-T>.
-        map('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
+        local fzf = require 'fzf-lua'
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
+        map('gr', fzf.lsp_references, '[g]oto [r]eferences')
 
         -- Jump to the implementation of the word under your cursor.
-        --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', require('telescope.builtin').lsp_implementations, '[g]oto [I]mplementation')
-
-        -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        map('gD', require('telescope.builtin').lsp_type_definitions, '[g]oto type [D]efinition')
+        map('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
 
         -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        map('<leader>fd', require('telescope.builtin').lsp_document_symbols, '[f]ind [d]ocument symbols')
+        map('<leader>fd', fzf.lsp_document_symbols, '[f]ind [d]ocument symbols')
 
         -- Fuzzy find all the symbols in your current workspace
-        --  Similar to document symbols, except searches over your whole project.
-        map('<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[f]ind [s]symbols in workspace')
+        map('<leader>fs', fzf.lsp_live_workspace_symbols, '[f]ind [s]symbols in workspace')
+
+        -- Jump to the definition of the word under your cursor.
+        map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
+
+        -- Jump to the type of the word under your cursor.
+        map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
@@ -60,6 +59,9 @@ return {
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
         map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
+
+        -- Show hovering during insert mode
+        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { desc = 'show signature help' })
 
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -74,27 +76,36 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-
-        if client and client.supports_method 'textDocument/inlayHint' then
-          vim.lsp.inlay_hint.enable(true)
-
-          map('<leader>c', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, '[t]oggle inlay [h]int')
-        end
       end,
     })
+
+    vim.keymap.set('n', '<leader>th', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, { desc = '[t]oggle inlay [h]int' })
+
+    vim.keymap.set('n', '<leader>lr', function()
+      vim.cmd 'LspRestart'
+    end, { desc = '[l]sp [r]estart' })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
       gopls = {},
-      lua_ls = {},
+      lua_ls = {
+        settings = {
+          Lua = {
+            hint = {
+              enable = true,
+            },
+          },
+        },
+      },
       ocamllsp = {},
       zls = {},
       clangd = {},
       pyright = {},
+      elixirls = {},
       yamlls = {},
       vale_ls = {},
     }
@@ -102,9 +113,6 @@ return {
     require('mason').setup()
 
     vim.list_extend(ENSURE_INSTALLED, vim.tbl_keys(servers))
-
-    --- Setup neovim lua configuration before lspconfig.lua_ls.setup
-    require('neodev').setup()
 
     require('mason-lspconfig').setup {
       handlers = {
