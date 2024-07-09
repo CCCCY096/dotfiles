@@ -30,3 +30,5 @@ vim.keymap.set('n', 'Q', 'q')
 
 -- Clear search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.keymap.set('n', '<leader>L', '<cmd>Lazy<CR>')

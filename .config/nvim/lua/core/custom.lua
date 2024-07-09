@@ -1,6 +1,6 @@
 -- Better session experience!
 
-local default_sf = vim.fn.join({ vim.fn.getcwd(), 'Session.vim' }, '/')
+local default_sf = vim.fn.join({ vim.fn.getcwd(), 'session.vim' }, '/')
 
 local mksession = function(custom_sf)
   local sf = default_sf

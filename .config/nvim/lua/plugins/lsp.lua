@@ -107,7 +107,6 @@ return {
       pyright = {},
       elixirls = {},
       yamlls = {},
-      vale_ls = {},
     }
 
     require('mason').setup()

@@ -2,9 +2,6 @@
 	name = Chengyu Chen
 	email = ccccy096@gmail.com
 
-[core]
-	excludesfile = Session.vim
-
 [alias]
 	l = log --graph --oneline
 	la = log --graph --oneline -all

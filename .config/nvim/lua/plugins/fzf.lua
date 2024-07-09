@@ -18,7 +18,8 @@ return {
     }
 
     -- Files
-    vim.keymap.set('n', '<leader>ff', fzf.files, { desc = '[f]ind [f]iles' })
+    -- vim.keymap.set('n', '<leader>ff', fzf.files, { desc = '[f]ind [f]iles' })
+    vim.keymap.set('n', '<leader>k', fzf.files, { desc = 'find files' })
     vim.keymap.set('n', '<leader>fo', fzf.oldfiles, { desc = '[f]ind recently [o]pened files' })
     vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = '[f]ind existing [b]uffers' })
     vim.keymap.set('n', '<leader>fg', fzf.git_files, { desc = '[f]ind [g]it [f]iles' })
