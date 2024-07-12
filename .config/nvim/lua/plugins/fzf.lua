@@ -18,7 +18,6 @@ return {
     }
 
     -- Files
-    -- vim.keymap.set('n', '<leader>ff', fzf.files, { desc = '[f]ind [f]iles' })
     vim.keymap.set('n', '<leader>k', fzf.files, { desc = 'find files' })
     vim.keymap.set('n', '<leader>fo', fzf.oldfiles, { desc = '[f]ind recently [o]pened files' })
     vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = '[f]ind existing [b]uffers' })
@@ -30,6 +29,7 @@ return {
     vim.keymap.set('n', '<leader>fa', fzf.files, { desc = '[f]ind [a]ll by live grep' })
 
     -- Misc.
+    vim.keymap.set('n', '<leader>fd', fzf.diagnostics_workspace, { desc = '[f]ind [d]iagnostics in workspace' })
     vim.keymap.set('n', '<leader>fh', fzf.files, { desc = '[f]ind [h]elp' })
     vim.keymap.set('n', '<leader>fr', fzf.files, { desc = '[f]ind [r]esume' })
   end,

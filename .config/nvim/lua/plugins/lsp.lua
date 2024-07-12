@@ -34,34 +34,20 @@ return {
 
         local fzf = require 'fzf-lua'
 
-        -- Find references for the word under your cursor.
         map('gr', fzf.lsp_references, '[g]oto [r]eferences')
-
-        -- Jump to the implementation of the word under your cursor.
         map('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
-
-        -- Fuzzy find all the symbols in your current document.
-        map('<leader>fd', fzf.lsp_document_symbols, '[f]ind [d]ocument symbols')
-
-        -- Fuzzy find all the symbols in your current workspace
-        map('<leader>fs', fzf.lsp_live_workspace_symbols, '[f]ind [s]symbols in workspace')
-
-        -- Jump to the definition of the word under your cursor.
         map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
-
-        -- Jump to the type of the word under your cursor.
         map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
 
-        -- Rename the variable under your cursor
-        --  Most Language Servers support renaming across files, etc.
-        map('<leader>r', vim.lsp.buf.rename, '[r]ename')
+        map('<leader>ld', fzf.lsp_document_symbols, '[l]sp [d]ocument symbols')
+        map('<leader>lw', fzf.lsp_live_workspace_symbols, '[l]sp [w]orkspace symbols')
 
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
+        map('<leader>j', fzf.lsp_finder, '[jum]p to all LSP locations')
+        map('<leader>r', vim.lsp.buf.rename, '[r]ename')
         map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
         -- Show hovering during insert mode
-        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { desc = 'show signature help' })
+        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
