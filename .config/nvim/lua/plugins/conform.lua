@@ -1,5 +1,6 @@
 return {
   'stevearc/conform.nvim',
+  event = 'VeryLazy',
   config = function()
     vim.list_extend(ENSURE_INSTALLED, {
       'stylua',
@@ -20,9 +21,11 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        ocaml = { 'ocamlformat' },
         json = { 'prettier' },
         markdown = { 'prettier' },
-        ocaml = { 'ocamlformat' },
+        yaml = { 'prettier' },
+        html = { 'prettier' },
         -- Use the "*" filetype to run formatters on all filetypes.
         -- ['*'] = { 'codespell' },
         -- Use the "_" filetype to run formatters on filetypes that don't
@@ -34,11 +37,13 @@ return {
     local fmt = function()
       conform.format({ lsp_fallback = true }, nil)
     end
-    vim.keymap.set('n', '<leader>F', fmt, { desc = '[F]ormat' })
+
+    vim.keymap.set('n', '<leader>if', fmt, { desc = '[f]ormatter' })
 
     local toggleFormatOnSave = function()
       vim.g.disable_autoformat = not vim.g.disable_autoformat
     end
-    vim.keymap.set('n', '<leader>tf', toggleFormatOnSave, { desc = '[t]oggle auto [f]ormat' })
+
+    vim.keymap.set('n', '<leader>of', toggleFormatOnSave, { desc = 'auto [f]ormat' })
   end,
 }

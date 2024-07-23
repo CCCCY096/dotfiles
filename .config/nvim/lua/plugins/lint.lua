@@ -8,7 +8,7 @@ return {
       go = { 'golangcilint' }, -- golangcilint is installed locally by myself instead of mason
     }
 
-    vim.keymap.set('n', '<leader>l', lint.try_lint, { desc = '[l]int' })
+    vim.keymap.set('n', '<leader>il', lint.try_lint, { desc = '[l]int' })
 
     vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
       group = vim.api.nvim_create_augroup('AutoLintGroup', { clear = true }),

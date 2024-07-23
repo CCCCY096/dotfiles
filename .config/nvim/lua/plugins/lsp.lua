@@ -3,6 +3,7 @@ vim.filetype.add { extension = { templ = 'templ' } }
 
 return {
   'neovim/nvim-lspconfig',
+  event = 'VeryLazy',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for neovim
     'williamboman/mason.nvim',
@@ -39,10 +40,9 @@ return {
         map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
         map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
 
-        map('<leader>ld', fzf.lsp_document_symbols, '[l]sp [d]ocument symbols')
-        map('<leader>lw', fzf.lsp_live_workspace_symbols, '[l]sp [w]orkspace symbols')
-
-        map('<leader>j', fzf.lsp_finder, '[jum]p to all LSP locations')
+        map('<leader>s', fzf.lsp_document_symbols, '[s]ymbols')
+        map('<leader>S', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
+        map('<leader>k', fzf.lsp_finder, '[k]aboom!')
         map('<leader>r', vim.lsp.buf.rename, '[r]ename')
         map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 

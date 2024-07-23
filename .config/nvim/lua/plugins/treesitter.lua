@@ -1,8 +1,9 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  event = 'VeryLazy',
   dependencies = {
-      'nvim-treesitter/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-context',
   },
   build = ':TSUpdate',
   config = function()
@@ -20,8 +21,6 @@ return {
         keymaps = {
           init_selection = '<C-s>',
           node_incremental = '<C-s>',
-          scope_incremental = 'grc',
-          node_decremental = '<M-s>',
         },
       },
     }

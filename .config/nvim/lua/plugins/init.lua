@@ -1,10 +1,25 @@
 return {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
   {
     'folke/which-key.nvim',
-    config = true,
+    config = function()
+      local wk = require 'which-key'
+      wk.setup {
+        preset = 'helix',
+        delay = 0,
+        icons = {
+          rules = false,
+        },
+      }
+      wk.add {
+        { '<leader>p', group = '[p]ick' },
+        { '<leader>o', group = '[o]ption' },
+        { '<leader>i', group = '[i]nvoke' },
+        { '<leader>l', group = '[l]sp' },
+      }
+    end,
   },
+
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   {
     'echasnovski/mini.nvim',
@@ -30,7 +45,7 @@ return {
         vim.g.minipairs_disable = not vim.g.minipairs_disable
       end
 
-      vim.keymap.set('n', '<leader>tp', toggleAutoPair, { desc = '[t]oggle auto [p]air' })
+      vim.keymap.set('n', '<leader>tp', toggleAutoPair, { desc = 'auto [p]air' })
     end,
   },
 

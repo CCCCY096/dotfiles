@@ -6,7 +6,7 @@
 	l = log --graph --oneline
 	la = log --graph --oneline -all
 	s = status
-	b = branch -vv
 	a = add .
+	b = branch -vv --sort -committerdate
 	c = commit
 	ca = commit --amend

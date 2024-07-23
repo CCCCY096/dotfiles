@@ -41,5 +41,5 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
   end,
 })
 
-vim.keymap.set('n', '<leader>S', mksession, { desc = 'make [S]ession' })
-vim.keymap.set('n', '<leader>s', ldsession, { desc = 'load [s]ession' })
+vim.keymap.set('n', '<leader>M', mksession, { desc = '[M]emorize session' })
+vim.keymap.set('n', '<leader>m', ldsession, { desc = 're[m]ember session' })

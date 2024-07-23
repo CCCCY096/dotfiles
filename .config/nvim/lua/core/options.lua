@@ -31,9 +31,8 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
--- Decrease update time
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
+-- don't timeout in keymap sequence
+vim.opt.timeout = false
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true

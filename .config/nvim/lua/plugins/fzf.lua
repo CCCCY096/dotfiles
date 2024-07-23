@@ -12,25 +12,32 @@ return {
           delay = 10,
         },
       },
-      fzf_opts = {
-        ['--layout'] = false,
-      },
     }
 
-    -- Files
-    vim.keymap.set('n', '<leader>k', fzf.files, { desc = 'find files' })
-    vim.keymap.set('n', '<leader>fo', fzf.oldfiles, { desc = '[f]ind recently [o]pened files' })
-    vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = '[f]ind existing [b]uffers' })
-    vim.keymap.set('n', '<leader>fg', fzf.git_files, { desc = '[f]ind [g]it [f]iles' })
+    vim.keymap.set('n', '<leader>f', fzf.files, { desc = '[f]iles' })
+    vim.keymap.set('n', '<leader>F', function()
+      fzf.files { cwd = vim.fn.expand '%:p:h' }
+    end, { desc = '[F]ile peers' })
 
-    -- Grep
-    vim.keymap.set('n', '<leader>/', fzf.lgrep_curbuf, { desc = '[/] search in current buffer' })
-    vim.keymap.set('n', '<leader>fw', fzf.files, { desc = '[f]ind current [w]ord' })
-    vim.keymap.set('n', '<leader>fa', fzf.files, { desc = '[f]ind [a]ll by live grep' })
+    vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = '[b]uffers' })
+    vim.keymap.set('n', '<leader>d', fzf.diagnostics_document, { desc = '[d]iagnostics' })
+    vim.keymap.set('n', '<leader>D', fzf.diagnostics_workspace, { desc = 'workspace [D]iagnostics' })
+    vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'fuzzy search workspace' })
+    vim.keymap.set('n', '<leader>j', fzf.jumps, { desc = '[j]ump list' })
 
-    -- Misc.
-    vim.keymap.set('n', '<leader>fd', fzf.diagnostics_workspace, { desc = '[f]ind [d]iagnostics in workspace' })
-    vim.keymap.set('n', '<leader>fh', fzf.files, { desc = '[f]ind [h]elp' })
-    vim.keymap.set('n', '<leader>fr', fzf.files, { desc = '[f]ind [r]esume' })
+    vim.keymap.set('n', '<leader>po', fzf.oldfiles, { desc = '[o]ld files' })
+    vim.keymap.set('n', '<leader>pg', fzf.git_files, { desc = '[g]it [f]iles' })
+    vim.keymap.set('n', '<leader>pw', fzf.files, { desc = '[w]ord' })
+    vim.keymap.set('n', '<leader>ph', fzf.helptags, { desc = '[h]elp' })
+    vim.keymap.set('n', '<leader>pr', fzf.resume, { desc = '[r]esume' })
+    vim.keymap.set('n', '<leader>pm', fzf.builtin, { desc = '[m]ore...' })
+
+    -- special dirs
+    vim.keymap.set('n', '<leader>pc', function()
+      fzf.files { cwd = '~/.config/' }
+    end, { desc = '[c]onfigs' })
+    vim.keymap.set('n', '<leader>pj', function()
+      fzf.files { cwd = '~/projects/journals/' }
+    end, { desc = '[j]ournals' })
   end,
 }

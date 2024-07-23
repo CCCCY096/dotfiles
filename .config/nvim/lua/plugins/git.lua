@@ -2,7 +2,7 @@ return {
   {
     'sindrets/diffview.nvim',
     config = function()
-      vim.keymap.set('n', '<leader>D', ':DiffviewOpen<CR>', { desc = '[D]iffview Open' })
+      vim.keymap.set('n', '<leader>G', ':DiffviewOpen<CR>', { desc = '[G]it diff' })
     end,
   },
 
@@ -43,8 +43,8 @@ return {
             return '<Ignore>'
           end, { expr = true })
 
-          map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[t]oggle [b]lame' })
-          map('n', '<leader>td', gs.toggle_deleted, { desc = '[t]oggle [d]eleted' })
+          map('n', '<leader>ob', gs.toggle_current_line_blame, { desc = '[b]lame' })
+          map('n', '<leader>od', gs.toggle_deleted, { desc = '[d]eleted' })
 
           map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
           map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })

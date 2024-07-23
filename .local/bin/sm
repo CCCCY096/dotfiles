@@ -1,0 +1,21 @@
+#!/bin/zsh
+
+proj_path=$(fd -d 1 -t d . ~/projects/ ~/projects/playground/ ~/.config/ | fzf | xargs realpath)
+file_name=$(basename $proj_path | tr . _)
+
+if [[ -z $file_name ]]; then
+	exit 0
+fi
+
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+	tmux new-session -s $file_name -c $proj_path
+	exit 0
+fi
+
+if ! tmux has-session -t=$file_name 2> /dev/null; then
+	tmux new-session -ds $file_name -c $proj_path
+fi
+
+tmux switch-client -t $file_name
