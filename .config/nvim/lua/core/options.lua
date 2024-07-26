@@ -52,3 +52,8 @@ vim.opt.hlsearch = true
 
 -- No more annoying swap file
 vim.opt.swapfile = false
+
+-- syntax aware folds
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

@@ -78,6 +78,7 @@ return {
 
     local servers = {
       gopls = {},
+      goalngci_lint_ls = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -92,7 +93,6 @@ return {
       clangd = {},
       pyright = {},
       elixirls = {},
-      yamlls = {},
     }
 
     require('mason').setup()

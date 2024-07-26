@@ -23,51 +23,21 @@ return {
           end
 
           -- Navigation
-          map('n', ']c', function()
-            if vim.wo.diff then
-              return ']c'
-            end
-            vim.schedule(function()
-              gs.next_hunk()
-            end)
-            return '<Ignore>'
-          end, { expr = true })
+          map('n', ']g', function()
+            gs.nav_hunk('next', nil)
+          end, { desc = { 'next [g]it hunk' } })
 
-          map('n', '[c', function()
-            if vim.wo.diff then
-              return '[c'
-            end
-            vim.schedule(function()
-              gs.prev_hunk()
-            end)
-            return '<Ignore>'
-          end, { expr = true })
+          map('n', '[g', function()
+            gs.nav_hunk('prev', nil)
+          end, { desc = { 'prev [g]it hunk' } })
 
           map('n', '<leader>ob', gs.toggle_current_line_blame, { desc = '[b]lame' })
           map('n', '<leader>od', gs.toggle_deleted, { desc = '[d]eleted' })
 
-          map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
           map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
           map('v', '<leader>gr', function()
             gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
           end, { desc = '[g]it [r]eset hunk' })
-          map('n', '<leader>gs', gs.stage_hunk, { desc = '[g]it [s]tage hunk' })
-          map('n', '<leader>gu', gs.undo_stage_hunk, { desc = '[g]it [u]ndo hunk' })
-
-          -- Less frequent actions
-          map('v', '<leader>gs', function()
-            gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-          end, { desc = '[g]it [s]tage hunk' })
-          map('n', '<leader>gS', gs.stage_buffer, { desc = '[g]it [S]tage buffer' })
-          map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset buffer' })
-
-          map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff working tree' })
-          map('n', '<leader>gD', function()
-            gs.diffthis '~'
-          end, { desc = '[g]it [D]iff HEAD' })
-
-          -- Text object
-          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
       }
     end,

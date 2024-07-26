@@ -1,0 +1,14 @@
+[[language]]
+name = "markdown"
+auto-format = true
+formatter = {command = "prettier", args = ["--parser", "markdown"]}
+
+[[language]]
+name = "json"
+auto-format = true
+formatter = {command = "prettier", args = ["--parser", "json"]}
+
+[[language]]
+name = "ocaml"
+auto-format = true
+formatter = {command = "ocamlformat"}
