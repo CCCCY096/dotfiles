@@ -19,11 +19,14 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<C-m>',
-          node_incremental = '<C-m>',
-          node_decremental = '<C-r>',
+          init_selection = '<C-n>',
+          node_incremental = '<C-n>',
+          node_decremental = '<C-p>',
         },
       },
+      disable = function(_, bufnr)
+        return vim.api.nvim_buf_line_count(bufnr) > 50000
+      end,
     }
   end,
 }

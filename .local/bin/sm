@@ -1,21 +1,30 @@
 #!/bin/zsh
 
-proj_path=$(fd -d 1 -t d . ~/projects/ ~/projects/playground/ ~/.config/ | fzf | xargs realpath)
-file_name=$(basename $proj_path | tr . _)
+PROJ_PATH=$(fd -d 1 -t d . ~/projects/ ~/projects/playground/ ~/projects/leetcode/ ~/.config/ | fzf | xargs realpath)
 
-if [[ -z $file_name ]]; then
+if [[ -z $PROJ_PATH ]]; then
+	exit 1
+fi
+
+FILE_NAME=$(basename $PROJ_PATH | tr . _)
+
+if [[ -z $FILE_NAME ]]; then
+	exit 1
+fi
+
+TMUX_RUNNING=$(pgrep tmux)
+
+if [[ -z $TMUX_RUNNING ]]; then
+	tmux new-session -s $FILE_NAME -c $PROJ_PATH
 	exit 0
 fi
 
-tmux_running=$(pgrep tmux)
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-	tmux new-session -s $file_name -c $proj_path
-	exit 0
+if ! tmux has-session -t=$FILE_NAME 2> /dev/null; then
+	tmux new-session -ds $FILE_NAME -c $PROJ_PATH
 fi
 
-if ! tmux has-session -t=$file_name 2> /dev/null; then
-	tmux new-session -ds $file_name -c $proj_path
+if [[ -z $TMUX ]] ; then
+	tmux attach -t $FILE_NAME
+else
+	tmux switch-client -t $FILE_NAME
 fi
-
-tmux switch-client -t $file_name

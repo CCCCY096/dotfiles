@@ -1,15 +1,16 @@
 return {
   {
     'rebelot/kanagawa.nvim',
-    lazy = true,
+    priority = 1000,
     config = function()
       require('kanagawa').setup()
+      vim.cmd 'colorscheme kanagawa'
     end,
   },
 
   {
     'ellisonleao/gruvbox.nvim',
-    priority = 1000,
+    lazy = true,
     config = function()
       vim.cmd 'colorscheme gruvbox'
     end,

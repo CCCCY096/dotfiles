@@ -26,14 +26,17 @@ return {
     'ibhagwan/fzf-lua',
   },
   config = function()
+    -- for highlighting curosr
+    vim.opt.updatetime = 100
+
+    local fzf = require 'fzf-lua'
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('Chengyu-lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
-
-        local fzf = require 'fzf-lua'
 
         map('gr', fzf.lsp_references, '[g]oto [r]eferences')
         map('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
@@ -89,10 +92,11 @@ return {
         },
       },
       ocamllsp = {},
+      elixirls = {},
+      markdown_oxide = {},
       zls = {},
       clangd = {},
       pyright = {},
-      elixirls = {},
     }
 
     require('mason').setup()

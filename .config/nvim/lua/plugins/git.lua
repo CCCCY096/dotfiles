@@ -25,11 +25,11 @@ return {
           -- Navigation
           map('n', ']g', function()
             gs.nav_hunk('next', nil)
-          end, { desc = { 'next [g]it hunk' } })
+          end, { desc = 'next [g]it hunk' })
 
           map('n', '[g', function()
             gs.nav_hunk('prev', nil)
-          end, { desc = { 'prev [g]it hunk' } })
+          end, { desc = 'prev [g]it hunk' })
 
           map('n', '<leader>ob', gs.toggle_current_line_blame, { desc = '[b]lame' })
           map('n', '<leader>od', gs.toggle_deleted, { desc = '[d]eleted' })
