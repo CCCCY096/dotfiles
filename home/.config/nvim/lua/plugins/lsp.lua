@@ -49,10 +49,8 @@ return {
         map('<leader>r', vim.lsp.buf.rename, '[r]ename')
         map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
-        -- Show hovering during insert mode
         vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.supports_method 'textDocument/documentHighlight' then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {

@@ -19,9 +19,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = '[w]rite current buffer' })
 vim.keymap.set('n', '<leader>q', ':qa<CR>', { desc = '[q]uit all' })
 
-vim.keymap.set('n', 'q', '<Nop>')
-vim.keymap.set('n', 'Q', 'q')
-
 -- Clear search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 

@@ -25,7 +25,9 @@ return {
     vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'fuzzy search workspace' })
     vim.keymap.set('n', '<leader>j', fzf.jumps, { desc = '[j]ump list' })
 
-    vim.keymap.set('n', '<leader>po', fzf.oldfiles, { desc = '[o]ld files' })
+    vim.keymap.set('n', '<leader>po', function()
+      fzf.old_files { cwd_only = true }
+    end, { desc = '[o]ld files' })
     vim.keymap.set('n', '<leader>pg', fzf.git_files, { desc = '[g]it [f]iles' })
     vim.keymap.set('n', '<leader>pw', fzf.files, { desc = '[w]ord' })
     vim.keymap.set('n', '<leader>ph', fzf.helptags, { desc = '[h]elp' })
