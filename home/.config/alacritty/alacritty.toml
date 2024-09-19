@@ -11,6 +11,5 @@ family = "JetBrainsMono Nerd Font"
 [window]
 opacity = 0.9
 dynamic_padding = true
-
 option_as_alt = "Both"
 decorations = "buttonless"
