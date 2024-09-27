@@ -2,3 +2,4 @@ zmodule git-info
 zmodule duration-info
 zmodule asciiship
 zmodule zsh-users/zsh-syntax-highlighting
+zmodule utility

@@ -26,7 +26,7 @@ return {
     vim.keymap.set('n', '<leader>j', fzf.jumps, { desc = '[j]ump list' })
 
     vim.keymap.set('n', '<leader>po', function()
-      fzf.old_files { cwd_only = true }
+      fzf.oldfiles { cwd_only = true }
     end, { desc = '[o]ld files' })
     vim.keymap.set('n', '<leader>pg', fzf.git_files, { desc = '[g]it [f]iles' })
     vim.keymap.set('n', '<leader>pw', fzf.files, { desc = '[w]ord' })

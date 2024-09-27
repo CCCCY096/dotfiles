@@ -18,6 +18,8 @@ source ${ZIM_HOME}/init.zsh
 # Chegnyu's stuff
 # ------------------------------
 
+setopt INC_APPEND_HISTORY
+
 # alias
 alias vim="nvim"
 alias lg="lazygit"

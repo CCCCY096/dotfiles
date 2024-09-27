@@ -66,9 +66,9 @@ return {
       end,
     })
 
-    vim.keymap.set('n', '<leader>th', function()
+    vim.keymap.set('n', '<leader>oh', function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-    end, { desc = '[t]oggle inlay [h]int' })
+    end, { desc = 'inlay [h]int' })
 
     vim.keymap.set('n', '<leader>lr', function()
       vim.cmd 'LspRestart'
@@ -95,6 +95,7 @@ return {
       zls = {},
       clangd = {},
       pyright = {},
+      texlab = {},
     }
 
     require('mason').setup()

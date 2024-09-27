@@ -45,7 +45,7 @@ return {
         vim.g.minipairs_disable = not vim.g.minipairs_disable
       end
 
-      vim.keymap.set('n', '<leader>tp', toggleAutoPair, { desc = 'auto [p]air' })
+      vim.keymap.set('n', '<leader>op', toggleAutoPair, { desc = 'auto [p]air' })
     end,
   },
 
