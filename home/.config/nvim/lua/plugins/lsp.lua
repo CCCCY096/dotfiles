@@ -19,9 +19,6 @@ return {
       config = true,
     },
 
-    -- Adds LSP completion capabilities
-    'hrsh7th/cmp-nvim-lsp',
-
     -- Need pickers when lsp attaches
     'ibhagwan/fzf-lua',
   },
@@ -75,7 +72,6 @@ return {
     end, { desc = '[l]sp [r]estart' })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
       gopls = {},
@@ -96,6 +92,12 @@ return {
       clangd = {},
       pyright = {},
       texlab = {},
+      typst_lsp = {
+        settings = {
+          exportPdf = 'onType', -- Choose onType, onSave or never.
+          -- serverPath = "" -- Normally, there is no need to uncomment it.
+        },
+      },
     }
 
     require('mason').setup()

@@ -26,6 +26,7 @@ return {
         markdown = { 'prettier' },
         yaml = { 'prettier' },
         html = { 'prettier' },
+        tex = { 'latexindent' },
         -- Use the "*" filetype to run formatters on all filetypes.
         -- ['*'] = { 'codespell' },
         -- Use the "_" filetype to run formatters on filetypes that don't

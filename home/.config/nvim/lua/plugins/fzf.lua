@@ -12,6 +12,14 @@ return {
           delay = 10,
         },
       },
+      grep = {
+        actions = {
+          -- toggle '.gitignore' for grep
+          ['ctrl-g'] = { fzf.actions.toggle_ignore },
+          -- narrow down the result set before switching to fuzzy matching with for further refinement.
+          ['ctrl-r'] = { fzf.actions.grep_lgrep },
+        },
+      },
     }
 
     vim.keymap.set('n', '<leader>f', fzf.files, { desc = '[f]iles' })
@@ -23,6 +31,7 @@ return {
     vim.keymap.set('n', '<leader>d', fzf.diagnostics_document, { desc = '[d]iagnostics' })
     vim.keymap.set('n', '<leader>D', fzf.diagnostics_workspace, { desc = 'workspace [D]iagnostics' })
     vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'fuzzy search workspace' })
+    vim.keymap.set('n', '<leader>?', fzf.lgrep_curbuf, { desc = 'fuzzy search current buffer' })
     vim.keymap.set('n', '<leader>j', fzf.jumps, { desc = '[j]ump list' })
 
     vim.keymap.set('n', '<leader>po', function()
