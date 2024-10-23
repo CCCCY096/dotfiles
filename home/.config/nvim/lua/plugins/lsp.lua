@@ -74,6 +74,7 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     local servers = {
+      markdown_oxide = {},
       gopls = {},
       goalngci_lint_ls = {},
       lua_ls = {
@@ -87,22 +88,17 @@ return {
       },
       ocamllsp = {},
       elixirls = {},
-      markdown_oxide = {},
       zls = {},
       clangd = {},
       pyright = {},
       texlab = {},
       typst_lsp = {
         settings = {
-          exportPdf = 'onType', -- Choose onType, onSave or never.
+          exportPdf = 'onSave', -- Choose onType, onSave or never.
           -- serverPath = "" -- Normally, there is no need to uncomment it.
         },
       },
     }
-
-    require('mason').setup()
-
-    vim.list_extend(ENSURE_INSTALLED, vim.tbl_keys(servers))
 
     require('mason-lspconfig').setup {
       handlers = {

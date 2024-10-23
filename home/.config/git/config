@@ -10,3 +10,6 @@
 	b = branch -vv --sort -committerdate
 	c = commit
 	ca = commit --amend
+
+[core]
+	editor = nvim

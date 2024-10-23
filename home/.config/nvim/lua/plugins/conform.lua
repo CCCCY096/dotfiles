@@ -2,13 +2,6 @@ return {
   'stevearc/conform.nvim',
   event = 'VeryLazy',
   config = function()
-    vim.list_extend(ENSURE_INSTALLED, {
-      'stylua',
-      'prettier',
-      'ocamlformat',
-      -- 'codespell',
-    })
-
     local conform = require 'conform'
     conform.setup {
       notify_on_error = false,
@@ -27,6 +20,7 @@ return {
         yaml = { 'prettier' },
         html = { 'prettier' },
         tex = { 'latexindent' },
+        typst = { 'typstfmt' },
         -- Use the "*" filetype to run formatters on all filetypes.
         -- ['*'] = { 'codespell' },
         -- Use the "_" filetype to run formatters on filetypes that don't

@@ -1,4 +1,6 @@
 return {
+  { 'williamboman/mason.nvim', config = true },
+
   {
     'folke/which-key.nvim',
     config = function()

@@ -1,0 +1,6 @@
+{
+  "if err != nil blah blah blah": {
+    "prefix": ["er"],
+    "body": "err != nil {${1:return err}}"
+  }
+}
