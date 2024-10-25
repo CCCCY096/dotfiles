@@ -29,6 +29,12 @@ return {
       snippet_backward = '<C-h>',
     },
 
+    windows = {
+      documentation = {
+        auto_show = true,
+      },
+    },
+
     highlight = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp

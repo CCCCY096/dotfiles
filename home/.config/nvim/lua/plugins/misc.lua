@@ -57,4 +57,14 @@ return {
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[u]ndo tree' })
     end,
   },
+
+  {
+    'nvchad/showkeys',
+    cmd = 'ShowkeysToggle',
+    opts = {
+      timeout = 1,
+      maxkeys = 3,
+      show_count = true,
+    },
+  },
 }
