@@ -67,10 +67,6 @@ return {
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, { desc = 'inlay [h]int' })
 
-    vim.keymap.set('n', '<leader>lr', function()
-      vim.cmd 'LspRestart'
-    end, { desc = '[l]sp [r]estart' })
-
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     local servers = {
@@ -92,10 +88,17 @@ return {
       clangd = {},
       pyright = {},
       texlab = {},
-      typst_lsp = {
+      tinymist = {
         settings = {
-          exportPdf = 'onSave', -- Choose onType, onSave or never.
-          -- serverPath = "" -- Normally, there is no need to uncomment it.
+          exportPdf = 'onType',
+        },
+      },
+      typos_lsp = {
+        autostart = false,
+        init_options = {
+          -- How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
+          -- Defaults to error.
+          diagnosticSeverity = 'Hint',
         },
       },
     }
@@ -112,5 +115,22 @@ return {
         end,
       },
     }
+
+    vim.keymap.set('n', '<leader>lr', function()
+      vim.cmd 'LspRestart'
+    end, { desc = '[r]estart' })
+
+    vim.keymap.set('n', '<leader>lst', function()
+      vim.cmd 'LspStart typos_lsp'
+    end, { desc = '[s]tart [t]ypos_lsp' })
+
+    vim.keymap.set('n', '<leader>lsm', function()
+      vim.cmd 'LspStart markdown_oxide'
+    end, { desc = '[s]tart [m]arkdown_oxide' })
+
+    local proj_path = vim.fs.root(0, '.git')
+    if proj_path and proj_path == vim.fs.root(0, 'daily') and vim.fs.basename(proj_path) == 'journals' then
+      vim.cmd 'LspStart markdown_oxide'
+    end
   end,
 }

@@ -6,10 +6,11 @@ return {
     local fzf = require 'fzf-lua'
 
     fzf.setup {
-      'defaults',
       winopts = {
         preview = {
-          delay = 10,
+          layout = 'vertical', -- horizontal|vertical|flex
+          vertical = 'up:55%',
+          delay = 0,
         },
       },
       grep = {
@@ -18,6 +19,8 @@ return {
           ['ctrl-g'] = { fzf.actions.toggle_ignore },
           -- narrow down the result set before switching to fuzzy matching with for further refinement.
           ['ctrl-r'] = { fzf.actions.grep_lgrep },
+          -- toggle matches from hidden files
+          ['ctrl-h'] = { fzf.actions.toggle_hidden },
         },
       },
     }
@@ -27,7 +30,7 @@ return {
       fzf.files { cwd = vim.fn.expand '%:p:h' }
     end, { desc = '[F]ile peers' })
 
-    vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = '[b]uffers' })
+    vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = 'buffers' })
     vim.keymap.set('n', '<leader>d', fzf.diagnostics_document, { desc = '[d]iagnostics' })
     vim.keymap.set('n', '<leader>D', fzf.diagnostics_workspace, { desc = 'workspace [D]iagnostics' })
     vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'fuzzy search workspace' })
