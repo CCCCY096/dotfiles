@@ -127,25 +127,25 @@ return {
         i = i + 1
       end
 
-      fzf.register_ui_select()
-
       vim.ui.select(lsp_names, {
-        prompt = 'Restart LSP ...',
-      }, function(choice)
-        if choice then
-          vim.cmd('LspStop ' .. choice)
-
-          -- needs wait for a while here cuz otherwise it's all messed up
-          vim.wait(100, function()
-            return false
-          end)
-
-          vim.cmd('LspStart ' .. choice)
+        prompt = 'LSP?',
+      }, function(lsp_choice)
+        if not lsp_choice then
+          return
         end
-      end)
 
-      fzf.deregister_ui_select()
-    end, { desc = '' })
+        -- have to nest it because on_choice funcs are async??
+        vim.ui.select({ 'Start', 'Stop' }, {
+          prompt = 'action?',
+        }, function(action_choice)
+          if not action_choice then
+            return
+          end
+
+          vim.cmd('Lsp' .. action_choice .. ' ' .. lsp_choice)
+        end)
+      end)
+    end, { desc = '[l]sp start/stop' })
 
     -- auto attach markdown_oxide when in project "journals"
     local proj_path = vim.fs.root(0, '.git')

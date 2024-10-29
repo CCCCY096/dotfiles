@@ -25,6 +25,8 @@ return {
       },
     }
 
+    fzf.register_ui_select()
+
     vim.keymap.set('n', '<leader>f', fzf.files, { desc = '[f]iles' })
     vim.keymap.set('n', '<leader>F', function()
       fzf.files { cwd = vim.fn.expand '%:p:h' }
