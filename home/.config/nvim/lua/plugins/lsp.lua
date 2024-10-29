@@ -89,8 +89,10 @@ return {
       pyright = {},
       texlab = {},
       tinymist = {
+        offset_encoding = 'utf-8', -- https://github.com/Myriad-Dreamin/tinymist/issues/638#issuecomment-2395941103
         settings = {
           exportPdf = 'onType',
+          outputPath = '$root/target/$dir/$name',
         },
       },
       typos_lsp = {
@@ -116,18 +118,36 @@ return {
       },
     }
 
-    vim.keymap.set('n', '<leader>lr', function()
-      vim.cmd 'LspRestart'
-    end, { desc = '[r]estart' })
+    vim.keymap.set('n', '<leader>l', function()
+      local lsp_names = {}
 
-    vim.keymap.set('n', '<leader>lst', function()
-      vim.cmd 'LspStart typos_lsp'
-    end, { desc = '[s]tart [t]ypos_lsp' })
+      local i = 1
+      for k, _ in pairs(servers) do
+        lsp_names[i] = k
+        i = i + 1
+      end
 
-    vim.keymap.set('n', '<leader>lsm', function()
-      vim.cmd 'LspStart markdown_oxide'
-    end, { desc = '[s]tart [m]arkdown_oxide' })
+      fzf.register_ui_select()
 
+      vim.ui.select(lsp_names, {
+        prompt = 'Restart LSP ...',
+      }, function(choice)
+        if choice then
+          vim.cmd('LspStop ' .. choice)
+
+          -- needs wait for a while here cuz otherwise it's all messed up
+          vim.wait(100, function()
+            return false
+          end)
+
+          vim.cmd('LspStart ' .. choice)
+        end
+      end)
+
+      fzf.deregister_ui_select()
+    end, { desc = '' })
+
+    -- auto attach markdown_oxide when in project "journals"
     local proj_path = vim.fs.root(0, '.git')
     if proj_path and proj_path == vim.fs.root(0, 'daily') and vim.fs.basename(proj_path) == 'journals' then
       vim.cmd 'LspStart markdown_oxide'
