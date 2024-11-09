@@ -27,5 +27,10 @@ return {
         return vim.api.nvim_buf_line_count(bufnr) > 50000
       end,
     }
+
+    -- syntax aware folds
+    vim.opt.foldlevel = 99
+    vim.opt.foldmethod = 'expr'
+    vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
   end,
 }

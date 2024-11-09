@@ -32,7 +32,7 @@ return {
       fzf.files { cwd = vim.fn.expand '%:p:h' }
     end, { desc = '[F]ile peers' })
 
-    vim.keymap.set('n', '<leader><leader>', fzf.buffers, { desc = 'buffers' })
+    vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = 'buffers' })
     vim.keymap.set('n', '<leader>d', fzf.diagnostics_document, { desc = '[d]iagnostics' })
     vim.keymap.set('n', '<leader>D', fzf.diagnostics_workspace, { desc = 'workspace [D]iagnostics' })
     vim.keymap.set('n', '<leader>/', fzf.live_grep, { desc = 'fuzzy search workspace' })

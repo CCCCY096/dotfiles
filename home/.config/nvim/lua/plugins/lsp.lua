@@ -92,7 +92,7 @@ return {
         offset_encoding = 'utf-8', -- https://github.com/Myriad-Dreamin/tinymist/issues/638#issuecomment-2395941103
         settings = {
           exportPdf = 'onType',
-          outputPath = '$root/target/$dir/$name',
+          -- outputPath = '$root/target/$dir/$name',
         },
       },
       typos_lsp = {
@@ -128,7 +128,7 @@ return {
       end
 
       vim.ui.select(lsp_names, {
-        prompt = 'LSP?',
+        prompt = 'LSP> ',
       }, function(lsp_choice)
         if not lsp_choice then
           return
@@ -136,7 +136,7 @@ return {
 
         -- have to nest it because on_choice funcs are async??
         vim.ui.select({ 'Start', 'Stop' }, {
-          prompt = 'action?',
+          prompt = 'Action> ',
         }, function(action_choice)
           if not action_choice then
             return

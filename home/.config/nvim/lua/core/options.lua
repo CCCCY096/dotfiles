@@ -29,7 +29,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'number'
+-- vim.opt.signcolumn = 'number'
 
 -- don't timeout in keymap sequence
 vim.opt.timeout = false
@@ -52,8 +52,3 @@ vim.opt.hlsearch = true
 
 -- No more annoying swap file
 vim.opt.swapfile = false
-
--- syntax aware folds
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
