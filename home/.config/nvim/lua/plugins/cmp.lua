@@ -15,7 +15,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = {
-      ['<C-space>'] = { 'show' },
+      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide' },
       ['<C-y>'] = { 'select_and_accept' },
 
@@ -27,12 +27,6 @@ return {
 
       ['<C-l>'] = { 'snippet_forward', 'fallback' },
       ['<C-h>'] = { 'snippet_backward', 'fallback' },
-    },
-
-    windows = {
-      documentation = {
-        auto_show = true,
-      },
     },
 
     highlight = {

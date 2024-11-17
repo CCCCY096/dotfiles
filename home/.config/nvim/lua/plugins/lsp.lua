@@ -91,7 +91,7 @@ return {
       tinymist = {
         offset_encoding = 'utf-8', -- https://github.com/Myriad-Dreamin/tinymist/issues/638#issuecomment-2395941103
         settings = {
-          exportPdf = 'onType',
+          exportPdf = 'onSave',
           -- outputPath = '$root/target/$dir/$name',
         },
       },
