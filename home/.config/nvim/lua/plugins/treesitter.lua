@@ -34,9 +34,9 @@ return {
         enable = true,
         disable = disable,
         keymaps = {
-          init_selection = '<C-n>',
-          node_incremental = '<C-n>',
-          node_decremental = '<C-p>',
+          -- init_selection = '<C-n>',
+          node_incremental = 'v',
+          node_decremental = 'V',
         },
       },
     }

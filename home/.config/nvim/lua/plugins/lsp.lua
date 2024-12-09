@@ -34,18 +34,20 @@ return {
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        map('gr', fzf.lsp_references, '[g]oto [r]eferences')
-        map('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
-        map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
-        map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
+        -- learn to use gr-defaults
 
-        map('<leader>s', fzf.lsp_document_symbols, '[s]ymbols')
-        map('<leader>S', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
+        -- map('gr', fzf.lsp_references, '[g]oto [r]eferences')
+        -- map('gI', fzf.lsp_implementations, '[g]oto [I0mplementation')
+        -- map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
+        map('grD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
+
+        -- map('<leader>s', fzf.lsp_document_symbols, '[s]ymbols')
+        map('gS', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
         map('<leader>k', fzf.lsp_finder, '[k]aboom!')
-        map('<leader>r', vim.lsp.buf.rename, '[r]ename')
-        map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
+        -- map('<leader>r', vim.lsp.buf.rename, '[r]ename')
+        -- map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
-        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
+        -- vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
         -- vim-illuminate does it better
         -- local client = vim.lsp.get_client_by_id(event.data.client_id)
