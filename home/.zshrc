@@ -18,13 +18,21 @@ source ${ZIM_HOME}/init.zsh
 # Chegnyu's stuff
 # ------------------------------
 
-setopt INC_APPEND_HISTORY
+
+# overriding /etc/zshrc
+HISTSIZE=200000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_REDUCE_BLANKS # Remove superfluous blanks before recording entry.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 
 # alias
 alias vim="nvim"
 alias lg="lazygit"
-alias l="ls -lA"
-alias lt="ls -lAtr"
+alias l="ls -lA --color"
+alias lt="ls -lAtr --color"
 
 # custom scripts
 export PATH=$PATH:~/.local/bin

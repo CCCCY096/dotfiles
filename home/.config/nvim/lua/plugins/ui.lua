@@ -3,7 +3,9 @@ return {
     'rebelot/kanagawa.nvim',
     priority = 1000,
     config = function()
-      require('kanagawa').setup()
+      require('kanagawa').setup {
+        transparent = true,
+      }
       vim.cmd 'colorscheme kanagawa'
     end,
   },
@@ -11,9 +13,6 @@ return {
   {
     'ellisonleao/gruvbox.nvim',
     lazy = true,
-    config = function()
-      vim.cmd 'colorscheme gruvbox'
-    end,
   },
 
   {

@@ -1,5 +1,11 @@
+# prompt
 zmodule git-info
 zmodule duration-info
 zmodule asciiship
+
+# quality of life
 zmodule zsh-users/zsh-syntax-highlighting
-zmodule utility
+
+# completion
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion

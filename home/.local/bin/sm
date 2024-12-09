@@ -1,6 +1,6 @@
 #!/bin/zsh
 #
-fd -d 1 -t d . ~/projects/ ~/projects/playground/ ~/projects/leetcode/ ~/.config/ | fzf | sed 's:/*$::' | read PROJ_PATH
+fd -d 1 -t d . ~/projects/ | fzf | sed 's:/*$::' | read PROJ_PATH
 
 if [[ -z $PROJ_PATH ]]; then
 	exit 1

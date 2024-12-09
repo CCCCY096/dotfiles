@@ -5,8 +5,8 @@ return {
     local oil = require 'oil'
     oil.setup {
       keymaps = {
-        ['<C-v>'] = 'actions.select_vsplit',
-        ['<C-s>'] = 'actions.select_split',
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+        ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
         ['q'] = 'actions.close',
       },
       view_options = {

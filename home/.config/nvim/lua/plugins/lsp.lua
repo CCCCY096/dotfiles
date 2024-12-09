@@ -19,17 +19,16 @@ return {
       config = true,
     },
 
+    -- lsp completion capabilities
+    'saghen/blink.cmp',
+
     -- Need pickers when lsp attaches
     'ibhagwan/fzf-lua',
   },
   config = function()
-    -- for highlighting curosr
-    vim.opt.updatetime = 100
-
     local fzf = require 'fzf-lua'
 
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('Chengyu-lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -48,26 +47,25 @@ return {
 
         vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.supports_method 'textDocument/documentHighlight' then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
-          })
-
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
+        -- vim-illuminate does it better
+        -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+        -- if client and client.supports_method 'textDocument/documentHighlight' then
+        --   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        --     buffer = event.buf,
+        --     callback = vim.lsp.buf.document_highlight,
+        --   })
+        --
+        --   vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        --     buffer = event.buf,
+        --     callback = vim.lsp.buf.clear_references,
+        --   })
+        -- end
       end,
     })
 
     vim.keymap.set('n', '<leader>oh', function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, { desc = 'inlay [h]int' })
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     local servers = {
       markdown_oxide = {},
@@ -108,12 +106,12 @@ return {
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
-          local server = servers[server_name] or {}
+          local config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+          require('lspconfig')[server_name].setup(config)
         end,
       },
     }
@@ -135,7 +133,7 @@ return {
         end
 
         -- have to nest it because on_choice funcs are async??
-        vim.ui.select({ 'Start', 'Stop' }, {
+        vim.ui.select({ 'Start', 'Stop', 'Restart' }, {
           prompt = 'Action> ',
         }, function(action_choice)
           if not action_choice then
@@ -147,10 +145,11 @@ return {
       end)
     end, { desc = '[l]sp start/stop' })
 
+    -- somehow this does not work anymore
     -- auto attach markdown_oxide when in project "journals"
-    local proj_path = vim.fs.root(0, '.git')
-    if proj_path and proj_path == vim.fs.root(0, 'daily') and vim.fs.basename(proj_path) == 'journals' then
-      vim.cmd 'LspStart markdown_oxide'
-    end
+    -- local proj_path = vim.fs.root(0, '.git')
+    -- if proj_path and proj_path == vim.fs.root(0, 'daily') and vim.fs.basename(proj_path) == 'journals' then
+    --   vim.cmd 'LspStart markdown_oxide'
+    -- end
   end,
 }

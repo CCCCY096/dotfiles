@@ -2,6 +2,16 @@ return {
   { 'williamboman/mason.nvim', config = true },
 
   {
+    'RRethy/vim-illuminate',
+    event = 'VeryLazy',
+    config = function()
+      require('illuminate').configure {
+        large_file_cutoff = 50000,
+      }
+    end,
+  },
+
+  {
     'folke/which-key.nvim',
     config = function()
       local wk = require 'which-key'
@@ -11,12 +21,17 @@ return {
         icons = {
           rules = false,
         },
+        win = {
+          wo = {
+            winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+          },
+        },
       }
       wk.add {
         { '<leader>p', group = '[p]ick' },
         { '<leader>o', group = '[o]ption' },
         { '<leader>i', group = '[i]nvoke' },
-        { '<leader>l', group = '[l]sp' },
+        { '<leader>g', group = '[g]it' },
       }
     end,
   },
@@ -67,4 +82,21 @@ return {
       show_count = true,
     },
   },
+
+  { 'meznaric/key-analyzer.nvim', opts = {} },
+
+  -- {
+  --   'folke/flash.nvim',
+  --   event = 'VeryLazy',
+  --   ---@type Flash.Config
+  --   opts = {},
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  --     { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+  --     { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  --     { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+  --     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  --   },
+  -- },
 }
