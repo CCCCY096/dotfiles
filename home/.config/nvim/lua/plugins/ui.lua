@@ -1,13 +1,31 @@
 return {
   {
-    'rebelot/kanagawa.nvim',
+    'folke/tokyonight.nvim',
     priority = 1000,
-    config = function()
-      require('kanagawa').setup {
-        transparent = true,
-      }
-      vim.cmd 'colorscheme kanagawa'
+    opts = {
+      transparent = true,
+    },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd 'colorscheme tokyonight'
     end,
+  },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    lazy = true,
+    opts = {
+      transparent_background = true,
+    },
+  },
+
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = true,
+    opts = {
+      transparent = true,
+    },
   },
 
   {
@@ -18,13 +36,11 @@ return {
   {
     'ribru17/bamboo.nvim',
     lazy = true,
-    config = function()
-      require('bamboo').setup {
-        highlights = {
-          ['@comment'] = { fg = '$grey' },
-        },
-      }
-    end,
+    opts = {
+      highlights = {
+        ['@comment'] = { fg = '$grey' },
+      },
+    },
   },
 
   -- {

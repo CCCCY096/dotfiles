@@ -5,10 +5,6 @@ return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for neovim
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-
     -- Useful status updates for LSP
     { 'j-hui/fidget.nvim', config = true },
 
@@ -34,20 +30,21 @@ return {
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- learn to use gr-defaults
+        -- unset gr-defaults in nvim v0.11.0
+        -- vim.keymap.set('n', 'gr', 'gr', {nowait = true})
 
-        -- map('gr', fzf.lsp_references, '[g]oto [r]eferences')
-        -- map('gI', fzf.lsp_implementations, '[g]oto [I0mplementation')
-        -- map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
-        map('grD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
+        map('gr', fzf.lsp_references, '[g]oto [r]eferences')
+        map('gI', fzf.lsp_implementations, '[g]oto [I]mplementation')
+        map('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
+        map('gD', vim.lsp.buf.type_definition, '[g]oto type [D]efinition')
 
-        -- map('<leader>s', fzf.lsp_document_symbols, '[s]ymbols')
-        map('gS', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
-        map('<leader>k', fzf.lsp_finder, '[k]aboom!')
-        -- map('<leader>r', vim.lsp.buf.rename, '[r]ename')
-        -- map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
+        map('<leader>s', fzf.lsp_document_symbols, '[s]ymbols')
+        map('<leader>S', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
+        map('<leader>x', fzf.lsp_finder, '[x]ray')
+        map('<leader>r', vim.lsp.buf.rename, '[r]ename')
+        map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
-        -- vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
+        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
         -- vim-illuminate does it better
         -- local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -69,10 +66,11 @@ return {
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, { desc = 'inlay [h]int' })
 
+    -- managed by homebrew by default
     local servers = {
       markdown_oxide = {},
-      gopls = {},
-      goalngci_lint_ls = {},
+      gopls = {},            -- go install golang.org/x/tools/gopls@latest
+      golangci_lint_ls = {}, -- go install github.com/nametake/golangci-lint-langserver@latest
       lua_ls = {
         settings = {
           Lua = {
@@ -82,12 +80,12 @@ return {
           },
         },
       },
-      ocamllsp = {},
-      elixirls = {},
-      zls = {},
+      ocamllsp = {}, -- opam
+      elixirls = {
+        cmd = { "elixir-ls" },
+      }, -- opam
       clangd = {},
       pyright = {},
-      texlab = {},
       tinymist = {
         offset_encoding = 'utf-8', -- https://github.com/Myriad-Dreamin/tinymist/issues/638#issuecomment-2395941103
         settings = {
@@ -105,18 +103,13 @@ return {
       },
     }
 
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local config = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-          require('lspconfig')[server_name].setup(config)
-        end,
-      },
-    }
+    for server_name, config in pairs(servers) do
+      -- This handles overriding only values explicitly passed
+      -- by the server configuration above. Useful when disabling
+      -- certain features of an LSP (for example, turning off formatting for tsserver)
+      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+      require('lspconfig')[server_name].setup(config)
+    end
 
     vim.keymap.set('n', '<leader>l', function()
       local lsp_names = {}
@@ -145,7 +138,7 @@ return {
           vim.cmd('Lsp' .. action_choice .. ' ' .. lsp_choice)
         end)
       end)
-    end, { desc = '[l]sp start/stop' })
+    end, { desc = '[l]sp start/stop/restart' })
 
     -- somehow this does not work anymore
     -- auto attach markdown_oxide when in project "journals"

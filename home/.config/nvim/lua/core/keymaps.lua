@@ -40,5 +40,12 @@ vim.keymap.set('n', '<leader>oc', toggleConcealLevel, { desc = 'conceallevel' })
 vim.keymap.set('n', '<leader>t', '<cmd>vert te<CR>', { desc = 'open terminal on right' })
 
 -- Quickfix related
-vim.keymap.set('n', '<C-n>', '<cmd>cn<CR>', { desc = 'cnext' })
 vim.keymap.set('n', '<C-p>', '<cmd>cp<CR>', { desc = 'cprev' })
+vim.keymap.set('n', '<C-n>', '<cmd>cn<CR>', { desc = 'cnext' })
+vim.keymap.set('n', '<leader>k', function()
+  if vim.fn.getqflist({ all = 0 }).winid == 0 then
+    vim.cmd 'copen'
+  else
+    vim.cmd 'cclose'
+  end
+end, { desc = 'toggle quic[k]fix' })

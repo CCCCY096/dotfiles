@@ -1,5 +1,5 @@
 return {
-  { 'williamboman/mason.nvim', config = true },
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   {
     'RRethy/vim-illuminate',
@@ -35,8 +35,6 @@ return {
       }
     end,
   },
-
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   {
     'echasnovski/mini.nvim',
