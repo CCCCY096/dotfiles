@@ -59,7 +59,7 @@ vim.opt.swapfile = false
 -- show more info
 vim.opt.list = true
 vim.opt.listchars = {
-  eol = '󰌑',
+  -- eol = '󰌑',
   tab = ' ',
   trail = '·',
   nbsp = '␣',
