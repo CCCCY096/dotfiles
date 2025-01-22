@@ -42,8 +42,8 @@ return {
         map('<leader>S', fzf.lsp_live_workspace_symbols, 'workspace [S]ymbols')
         map('<leader>x', fzf.lsp_finder, '[x]ray')
         map('<leader>r', vim.lsp.buf.rename, '[r]ename')
-        map('<leader>c', vim.lsp.buf.code_action, '[c]ode action')
 
+        vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[c]ode action' })
         vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'show signature help' })
 
         -- vim-illuminate does it better

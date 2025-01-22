@@ -49,3 +49,7 @@ vim.keymap.set('n', '<leader>k', function()
     vim.cmd 'cclose'
   end
 end, { desc = 'toggle quic[k]fix' })
+
+-- Stolen from Helix
+vim.keymap.set('n', 'gs', '_', { desc = 'goto first non-blank' })
+vim.keymap.set('n', 'gl', '$', { desc = 'goto line end' })

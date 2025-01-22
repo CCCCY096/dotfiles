@@ -1,30 +1,41 @@
+local use_colorscheme = function(name, opts)
+  require(name).setup(opts)
+  vim.cmd.colorscheme(name)
+end
+
 return {
   {
     'folke/tokyonight.nvim',
-    priority = 1000,
+    lazy = true,
     opts = {
-      transparent = true,
+      -- transparent = true,
     },
-    config = function(_, opts)
-      require('tokyonight').setup(opts)
-      vim.cmd 'colorscheme tokyonight'
-    end,
+    -- config = function(_, opts)
+    --   use_colorscheme('tokyonight', opts)
+    -- end,
   },
 
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    lazy = true,
+    priority = 1000,
     opts = {
       transparent_background = true,
+      background = { -- :h background
+        light = "latte",
+        dark = "frappe",
+      },
     },
+    config = function(_, opts)
+      use_colorscheme('catppuccin', opts)
+    end,
   },
 
   {
     'rebelot/kanagawa.nvim',
     lazy = true,
     opts = {
-      transparent = true,
+      -- transparent = true,
     },
   },
 
