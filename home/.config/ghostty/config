@@ -1,5 +1,7 @@
 font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 18
 
-# if 1, macOS window ops are gonna be laggy
+# if 1, macOS window ops are gonna be laggy - something i picked up from alacritty experience
 background-opacity = 0.90
+
+macos-icon = official

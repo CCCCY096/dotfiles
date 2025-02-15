@@ -29,7 +29,7 @@ setopt HIST_REDUCE_BLANKS # Remove superfluous blanks before recording entry.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 
 # alias
-alias vim="nvim"
+alias vim="~/nvim-macos-arm64/bin/nvim"
 alias lg="lazygit"
 alias l="ls -lA --color"
 alias lt="ls -lAtr --color"

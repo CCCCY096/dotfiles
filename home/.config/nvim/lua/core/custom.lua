@@ -3,12 +3,8 @@
 local default_sf = vim.fn.join({ vim.fn.getcwd(), 'session.vim' }, '/')
 
 local mksession = function(custom_sf)
-  local sf = default_sf
-  if custom_sf then
-    sf = custom_sf
-  end
-
-  local cmd = vim.fn.join { 'mksession! ', sf }
+  local sf = custom_sf or default_sf
+  local cmd = 'mksession! ' .. sf
   vim.cmd(cmd)
   print 'Made a local session!'
 end
@@ -19,7 +15,7 @@ local ldsession = function()
     return
   end
 
-  local cmd = vim.fn.join { 'source ', default_sf }
+  local cmd = 'source ' .. default_sf
   vim.cmd(cmd)
   print 'Loaded a local session!'
 end
